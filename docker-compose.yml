@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  # JavaScript Backend (General Web Scraper)
+  webscraper-js:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - CORS_ORIGIN=http://localhost:5173
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Python Backend (Car Data Scraper)
+  carscraper-python:
+    build:
+      context: .
+      dockerfile: Dockerfile.python
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - PORT=5000
+      - CORS_ORIGIN=http://localhost:5173
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Frontend (React App)
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "80:80"
+    depends_on:
+      webscraper-js:
+        condition: service_healthy
+      carscraper-python:
+        condition: service_healthy
+    restart: unless-stopped
+    environment:
+      - VITE_API_URL=http://localhost:3000
+      - VITE_CAR_API_URL=http://localhost:5000
+
+networks:
+  default:
+    name: webscraper-network 
