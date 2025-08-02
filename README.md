@@ -1,5 +1,15 @@
 # Advanced Web Scraper with Car Data Extraction
 
+## Quick Start
+
+🚀 **Live Demo**: https://webscraper-frontend-production.up.railway.app
+
+The application is fully deployed and ready to use! Try:
+- **Simple Scraper**: Basic web content extraction
+- **Enhanced Scraper**: Advanced scraping with browser automation
+- **Method Tester**: Compare different scraping methods
+- **Car Scraper**: Extract vehicle data from manufacturer websites
+
 ## Overview
 
 This project provides both general web scraping capabilities and specialized car data extraction. It includes:
@@ -124,10 +134,11 @@ This project provides both general web scraping capabilities and specialized car
 ### API Endpoints
 
 #### JavaScript Backend (Port 3000)
-- `POST /api/simple-scrape` - Basic web scraping
-- `POST /api/enhanced-scrape` - Advanced scraping with browser automation
-- `POST /api/method-test` - Compare scraping methods
+- `POST /api/scrape` - General web scraping (supports simple and enhanced modes)
+- `GET /api/compare-scraping-methods` - Compare HTTP, Puppeteer, and Selenium methods
 - `GET /api/health` - Health check
+- `GET /api/price-history` - Get price history for URLs
+- `GET /api/anti-scraping-techniques` - Get available anti-scraping techniques
 
 #### Python Backend (Port 5000)
 - `POST /api/scrape-car` - Car data extraction
@@ -137,24 +148,36 @@ This project provides both general web scraping capabilities and specialized car
 
 #### General Web Scraping
 ```javascript
-// Simple scraping
-const response = await fetch('http://localhost:3000/api/simple-scrape', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ url: 'https://example.com' })
-});
-
-// Enhanced scraping
-const response = await fetch('http://localhost:3000/api/enhanced-scrape', {
+// General scraping (supports both simple and enhanced modes)
+const response = await fetch('http://localhost:3000/api/scrape', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ 
     url: 'https://example.com',
     options: { 
-      waitForSelector: '.content',
-      screenshot: true 
+      method: 'simple', // or 'enhanced'
+      includeImages: true,
+      includeLinks: true,
+      includeHeadlines: true,
+      includeParagraphs: true,
+      includeMetadata: true,
+      extractEmails: true,
+      extractPhones: true,
+      extractAddresses: true,
+      followRedirects: true,
+      timeout: 30000,
+      userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+      randomDelay: false,
+      stealth: false,
+      mobile: false
     }
   })
+});
+
+// Method comparison
+const response = await fetch('http://localhost:3000/api/compare-scraping-methods?url=https://example.com', {
+  method: 'GET',
+  headers: { 'Content-Type': 'application/json' }
 });
 ```
 
@@ -219,9 +242,19 @@ git commit -m "Deploy Python backend to Heroku"
 git push heroku main
 ```
 
-### 2. Railway Deployment
+### 2. Railway Deployment (Recommended)
 
-#### JavaScript Backend
+This project is currently deployed on Railway with the following URLs:
+
+- **Frontend**: https://webscraper-frontend-production.up.railway.app
+- **JavaScript Backend**: https://webscraper-backend-js-production.up.railway.app
+- **Python Backend**: https://webscraper-backend-python-production.up.railway.app
+
+#### Prerequisites
+- Railway CLI installed
+- Railway account
+
+#### JavaScript Backend Deployment
 ```bash
 # Install Railway CLI
 npm install -g @railway/cli
@@ -238,7 +271,7 @@ railway variables set PORT=3000
 railway up
 ```
 
-#### Python Backend
+#### Python Backend Deployment
 ```bash
 # Create new Railway project for Python
 railway init --name car-scraper-python
@@ -246,6 +279,19 @@ railway init --name car-scraper-python
 # Set environment variables
 railway variables set FLASK_ENV=production
 railway variables set PORT=5000
+
+# Deploy
+railway up
+```
+
+#### Frontend Deployment
+```bash
+# Create new Railway project for frontend
+railway init --name webscraper-frontend
+
+# Set environment variables
+railway variables set VITE_API_URL=https://webscraper-backend-js-production.up.railway.app
+railway variables set VITE_CAR_API_URL=https://webscraper-backend-python-production.up.railway.app
 
 # Deploy
 railway up
@@ -548,6 +594,14 @@ For issues and questions:
 
 ## Changelog
 
+### Version 2.1.0 (Current)
+- Fixed API endpoint connections for Railway deployment
+- Updated CORS configuration for cross-origin requests
+- Resolved "Failed to fetch" errors in frontend
+- Improved method tester functionality
+- Enhanced car scraper reliability
+- Updated deployment documentation
+
 ### Version 2.0.0
 - Added Python Flask car scraper
 - Removed hardcoded fallbacks
@@ -557,5 +611,4 @@ For issues and questions:
 ### Version 1.0.0
 - Initial release with Node.js web scraper
 - Basic scraping functionality
-- Method comparison tool #   U p d a t e d   f o r   f r o n t e n d   d e p l o y m e n t  
- 
+- Method comparison tool
