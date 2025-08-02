@@ -21,7 +21,12 @@ const isDev = process.env.NODE_ENV !== 'production';
 
 // CORS configuration
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
+  origin: [
+    'http://localhost:5173', 
+    'http://127.0.0.1:5173',
+    'https://webscraper-frontend-production.up.railway.app',
+    'https://*.up.railway.app'
+  ],
   credentials: true
 }));
 
