@@ -1,12 +1,6 @@
 import type { ScrapeRequest, ScrapeResponse, PriceHistory } from '@/types';
 
-interface WindowWithEnv extends Window {
-  __ENV__?: {
-    VITE_API_URL?: string;
-  };
-}
-
-const API_BASE_URL = (typeof window !== 'undefined' && (window as WindowWithEnv).__ENV__?.VITE_API_URL) || 'http://localhost:3000';
+const API_BASE_URL = 'https://webscraper-backend-js-production.up.railway.app';
 
 class ApiError extends Error {
   constructor(
