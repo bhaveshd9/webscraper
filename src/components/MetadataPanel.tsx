@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tag, Share2, Globe, Calendar, User, Eye, ExternalLink } from 'lucide-react';
+import { Tag, Share2, Globe, User, Eye, ExternalLink } from 'lucide-react';
 import type { Metadata, SocialMedia } from '@/types';
 
 interface MetadataPanelProps {

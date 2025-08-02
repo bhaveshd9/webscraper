@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Shield, Zap, Globe, Clock, Users, AlertTriangle, Info, ExternalLink, CheckCircle } from 'lucide-react';
+import { Shield, Zap, Globe, Users, AlertTriangle, Info, ExternalLink, CheckCircle } from 'lucide-react';
 import type { AntiScrapingData, TestScrapingRequest } from '@/types';
 
 interface AntiScrapingPanelProps {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Globe, Zap, Database, Shield, TrendingUp, CheckCircle } from 'lucide-react';
+import { Globe, Zap, Shield, TrendingUp, CheckCircle } from 'lucide-react';
 
 interface SplashScreenProps {
   onComplete: () => void;

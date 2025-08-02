@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Search, Settings, Zap, Shield, Database, Globe, ChevronDown, ChevronUp, Smartphone, Clock, Monitor, MousePointer, Camera, Download } from 'lucide-react';
+import { Search, Settings, Zap, Shield, Database, Globe, ChevronDown, ChevronUp, Monitor, MousePointer } from 'lucide-react';
 import type { ScrapeOptions, UserInteraction } from '@/types';
-import { OptionLabel, SCRAPING_OPTIONS_INFO } from './InfoTooltip';
+import { OptionLabel } from './InfoTooltip';
 
 interface EnhancedScrapeFormProps {
   onSubmit: (url: string, options: ScrapeOptions) => void;
@@ -358,7 +358,7 @@ export const EnhancedScrapeForm: React.FC<EnhancedScrapeFormProps> = ({ onSubmit
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       <OptionLabel option="waitForTimeout">
-                        Wait Timeout: {options.waitForTimeout / 1000}s
+                        Wait Timeout: {(options.waitForTimeout || 0) / 1000}s
                       </OptionLabel>
                     </label>
                     <input

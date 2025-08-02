@@ -12,7 +12,7 @@ interface InfoTooltipProps {
 export const InfoTooltip: React.FC<InfoTooltipProps> = ({ 
   content, 
   title, 
-  position = 'top', 
+ 
   size = 'md',
   className = '' 
 }) => {

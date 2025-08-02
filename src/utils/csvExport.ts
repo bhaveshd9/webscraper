@@ -1,4 +1,4 @@
-import type { ScrapedData, Headline, Link, Image, Form, Table, SocialMedia } from '@/types';
+import type { ScrapedData } from '@/types';
 
 export interface CSVExportOptions {
   includeHeaders?: boolean;
@@ -19,7 +19,7 @@ export interface CSVExportOptions {
 export class CSVExporter {
   static exportData(data: ScrapedData, options: CSVExportOptions = {}): string {
     const {
-      includeHeaders = true,
+
       includeImages = true,
       includeLinks = true,
       includeHeadlines = true,
@@ -31,7 +31,7 @@ export class CSVExporter {
       includeTables = true,
       includeScripts = false,
       includeStyles = false,
-      filename = 'scraped-data'
+
     } = options;
 
     const csvData: string[] = [];
@@ -182,7 +182,7 @@ export class CSVExporter {
     }
   }
 
-  static exportVehicleData(data: ScrapedData, options: CSVExportOptions = {}): string {
+  static exportVehicleData(data: ScrapedData, _options: CSVExportOptions = {}): string {
     // Specialized export for automotive data
     const csvData: string[] = [];
     

@@ -2,8 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { 
   Car, 
   Download, 
-  FileText, 
-  Globe, 
   Loader2, 
   Play, 
   Settings, 
@@ -11,15 +9,15 @@ import {
   Copy, 
   CheckCircle,
   AlertCircle,
-  Info,
   Zap,
   Database,
   Image as ImageIcon,
   DollarSign,
   Gauge,
-  Fuel,
   Wrench
 } from 'lucide-react';
+
+import { carApi } from '@/services/carApi';
 
 interface CarData {
   modelName: string;
@@ -126,22 +124,8 @@ const CarScraper: React.FC<{ onBack?: () => void }> = ({ onBack }) => {
 
     try {
       // Use Python Flask API for car scraping
-      const response = await fetch('http://localhost:5000/api/scrape-car', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          url,
-          options
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-      }
-
-      const data = await response.json();
+      // Use Python Flask API for car scraping
+      const data = await carApi.scrapeCar(url, options);
 
       if (data.success) {
         setCarData(data.carData);

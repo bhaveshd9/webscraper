@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Search, Settings, Zap, Shield, Database, Globe, ChevronDown, ChevronUp, Smartphone, Clock } from 'lucide-react';
+import { Search, Settings, Zap, Shield, Database, Globe, ChevronDown, ChevronUp } from 'lucide-react';
 import type { ScrapeOptions } from '@/types';
-import { OptionLabel, SCRAPING_OPTIONS_INFO } from './InfoTooltip';
+import { OptionLabel } from './InfoTooltip';
 
 interface ScrapeFormProps {
   onSubmit: (url: string, options: ScrapeOptions) => void;
