@@ -1,10 +1,4 @@
-interface WindowWithEnv extends Window {
-    __ENV__?: {
-      VITE_CAR_API_URL?: string;
-    };
-  }
-  
-  const CAR_API_BASE_URL = (typeof window !== 'undefined' && (window as WindowWithEnv).__ENV__?.VITE_CAR_API_URL) || 'http://localhost:5000';
+const CAR_API_BASE_URL = 'https://webscraper-backend-python-production.up.railway.app';
   
   // TypeScript interfaces for car scraping
   interface CarData {

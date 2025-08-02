@@ -86,7 +86,7 @@ const ScrapingMethodTester: React.FC<ScrapingMethodTesterProps> = ({ onBack }) =
         setTimeout(() => reject(new Error('Test timeout - taking too long')), 60000);
       });
 
-      const testPromise = fetch(`/api/compare-scraping-methods?url=${encodeURIComponent(url)}`)
+      const testPromise = fetch(`https://webscraper-backend-js-production.up.railway.app/api/compare-scraping-methods?url=${encodeURIComponent(url)}`)
         .then(response => response.json())
         .then(data => {
           if (data.success) {
