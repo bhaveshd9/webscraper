@@ -27,6 +27,12 @@ export default defineConfig({
   preview: {
     port: 8080,
     host: '0.0.0.0',
-    allowedHosts: ['healthcheck.railway.app', 'localhost', '127.0.0.1'],
+    allowedHosts: [
+      'healthcheck.railway.app', 
+      'localhost', 
+      '127.0.0.1',
+      'webscraper-frontend-production.up.railway.app',
+      '*.up.railway.app'
+    ],
   },
 }) 
